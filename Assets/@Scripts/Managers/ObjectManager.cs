@@ -4,12 +4,15 @@ using UnityEngine;
 public class ObjectManager : ContentManager {
 
     public HashSet<Domino> Dominos { get; private set; } = new();
+    public HashSet<Ground> Grounds { get; private set; } = new();
 
     #region Generals
 
     public void Clear() {
         Destroy(Dominos);
         Dominos.Clear();
+        Destroy(Grounds);
+        Grounds.Clear();
     }
 
     private T Instantiate<T>(string prefabName = null, bool pooling = true) where T : Entity {
@@ -61,4 +64,19 @@ public class ObjectManager : ContentManager {
 
     #endregion
 
+    #region Ground
+
+    public Ground NewGround() {
+        Ground ground = Instantiate<Ground>();
+        Grounds.Add(ground);
+
+        return ground;
+    }
+
+    public void RemoveGround(Ground ground) {
+        Grounds.Remove(ground);
+        Destroy(ground);
+    }
+
+    #endregion
 }

@@ -15,7 +15,7 @@ public class DominoSpawner {
 
     #region Fields
 
-
+    private GroundSpawner _groundSpawner;
 
     #endregion
 
@@ -23,6 +23,9 @@ public class DominoSpawner {
 
     public DominoSpawner() {
         this.Speed = 0.95f;
+        this.SpawnPosition = new(0, 5, 0);
+        this._groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+        this._groundSpawner.SetInfo();
     }
 
     #endregion
@@ -36,12 +39,14 @@ public class DominoSpawner {
         Current.OnFockyu += OnFockyu;
         Current.OnSleep -= NewDomino;
         Current.OnSleep += NewDomino;
+        _groundSpawner.RNLCKSGEK();
     }
 
     private void OnFockyu(Domino domino) {
         SpawnPosition = domino.transform.position + domino.transform.forward;
         SpawnRotation = domino.transform.rotation;
         Main.Screen.Camera.SetTarget(null);
+        _groundSpawner.RNLCKSGEK();
     }
 
 }

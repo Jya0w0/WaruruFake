@@ -22,6 +22,9 @@ public class GameScene : Scene {
         // #1. Controller 持失.
         Main.Game.Controller = Instantiate(Main.Resource.Get<GameObject>("Controller")).GetComponent<Controller>();
 
+        // #2. Ground 持失.
+        Main.Object.NewGround().SetInfo(Vector3.zero, Quaternion.identity);
+
         // #2. UI 持失.
         SceneUI = Main.UI.OpenScene<UI_Scene_Game>();
         SceneUI.Initialize();
