@@ -50,7 +50,6 @@ public class ObjectManager : ContentManager {
     public Domino NewDomino() {
         Domino domino = Instantiate<Domino>();
         Dominos.Add(domino);
-        domino.SetInfo();
 
         return domino;
     }

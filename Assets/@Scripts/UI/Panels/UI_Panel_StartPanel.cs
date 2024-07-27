@@ -35,7 +35,7 @@ public class UI_Panel_StartPanel : UI_Panel {
         _btnRanking = this.gameObject.FindChild<UI_Button>("btnRanking");
         _btnAchievement = this.gameObject.FindChild<UI_Button>("btnAchievement");
 
-        _btnBackground.SetEvent(OnBtnAchievement);
+        _btnBackground.SetEvent(OnBtnBackground);
         _btnInfo.SetEvent(OnBtnInfo);
         _btnStore.SetEvent(OnBtnStore);
         _btnADRemove.SetEvent(OnBtnADRemove);

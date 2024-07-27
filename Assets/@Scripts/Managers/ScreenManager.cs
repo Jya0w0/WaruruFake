@@ -8,15 +8,8 @@ public class ScreenManager : CoreManager {
 
     #region Properties
 
+    public CameraController Camera { get; private set; }
     public Vector2 Resolution { get; private set; }
-    public float ScreenRatio { get; private set; }
-    public float CameraSize { get; private set; }
-
-    public Camera Cam { get; private set; }
-
-    public Vector2 CamMin => (Vector2)Cam.transform.position - new Vector2(CameraSize * ScreenRatio, CameraSize);
-    public Vector2 CamMax => (Vector2)Cam.transform.position + new Vector2(CameraSize * ScreenRatio, CameraSize);
-
 
     #endregion
 
@@ -37,11 +30,8 @@ public class ScreenManager : CoreManager {
     #endregion
 
     public void Reset() {
-        Cam = Camera.main;
-
+        this.Camera = GameObject.FindObjectOfType<CameraController>();
         this.Resolution = new(1080f, 1920f);
-        this.ScreenRatio = Resolution.x / Resolution.y;
-        this.CameraSize = Cam.orthographicSize;
     }
 
 }

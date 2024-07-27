@@ -48,10 +48,12 @@ public class GameManager : ContentManager {
             }
             else if (_state == GameState.Play) {
                 Spawner = new();
+                Controller.SetInfo(Spawner);
             }
             OnChangedState?.Invoke(value);
         }
     }
+    public Controller Controller { get; set; }
     public DominoSpawner Spawner { get; private set; }
 
     #endregion
@@ -90,6 +92,15 @@ public class GameManager : ContentManager {
 
     public void Start() {
         State = GameState.Play;
+        Spawner.NewDomino();
+    }
+
+    public void Over() {
+        State = GameState.Over;
+    }
+
+    public void End() {
+        State = GameState.End;
     }
 
     public void Reset() {

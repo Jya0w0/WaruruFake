@@ -13,6 +13,7 @@ public class Timer {
                 _current = 0;
                 OnTime?.Invoke();
                 if (ResetOnTime) _current = Time;
+                return;
             }
             _current = value;
         }
