@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class Main : MonoBehaviour
-{
+public class Main : MonoBehaviour {
 
     #region Singleton
 
