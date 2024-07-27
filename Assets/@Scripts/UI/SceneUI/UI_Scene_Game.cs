@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_Scene_Game : UI_Scene {
@@ -12,7 +10,8 @@ public class UI_Scene_Game : UI_Scene {
 
     #region Fields
 
-
+    private UI_Text _txtScore;
+    private UI_Text _txtMoney;
 
     #endregion
 
@@ -28,12 +27,30 @@ public class UI_Scene_Game : UI_Scene {
         _rect.anchorMin = new(min.x / Screen.width, min.y / Screen.height);
         _rect.anchorMax = new(max.x / Screen.width, max.y / Screen.height);
 
+        _txtMoney = this.gameObject.FindChild<UI_Text>("txtMoney");
+        Main.Game.OnChangedMoney -= OnChangedMoney;
+        Main.Game.OnChangedMoney += OnChangedMoney;
+        _txtScore = this.gameObject.FindChild<UI_Text>("txtScore");
+        Main.Game.OnChangedScore -= OnChangedScore;
+        Main.Game.OnChangedScore += OnChangedScore;
+
         return true;
+    }
+
+    public void SetInfo() {
+        Initialize();
     }
 
     #endregion
 
-    #region OnButtons
+    #region Events
+
+    private void OnChangedScore(int score) {
+        _txtScore.Text = $"{score}";
+    }
+    private void OnChangedMoney(int money) {
+        _txtMoney.Text = $"{money}";
+    }
 
     #endregion
 

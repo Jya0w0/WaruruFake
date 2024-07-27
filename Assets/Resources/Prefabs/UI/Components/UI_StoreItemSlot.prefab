@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2131167150796773384}
   - component: {fileID: 3420389065378465964}
   m_Layer: 5
-  m_Name: UI_SkinInfo
+  m_Name: UI_StoreItemSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

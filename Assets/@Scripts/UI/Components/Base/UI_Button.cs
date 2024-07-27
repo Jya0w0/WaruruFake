@@ -68,6 +68,14 @@ public class UI_Button : UI {
         return this;
     }
 
+    public UI_Button SetColor(Color color) {
+        Initialize();
+
+        _image.SetColor(color);
+
+        return this;
+    }
+
     public UI_Button SetActive(bool active) {
         if (active) {
             _button.interactable = true;

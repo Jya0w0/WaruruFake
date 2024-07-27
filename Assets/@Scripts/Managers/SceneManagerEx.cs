@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class SceneManagerEx : CoreManager {
 
@@ -12,6 +13,8 @@ public class SceneManagerEx : CoreManager {
         return true;
     }
 
+    public void Load(string sceneName) => SceneManager.LoadScene(sceneName);
+    public void Reload() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 }
 
 public abstract class Scene : MonoBehaviour {

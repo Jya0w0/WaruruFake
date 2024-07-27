@@ -1,7 +1,5 @@
+using DG.Tweening;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,8 +21,6 @@ public class UI_Panel : UI {
     #endregion
 
     #region MonoBehaviours
-
-
 
     #endregion
 

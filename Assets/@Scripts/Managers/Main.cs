@@ -28,6 +28,7 @@ public class Main : MonoBehaviour {
 
     // Content.
     public static UIManager UI => Instance?._ui;
+    public static GameManager Game => Instance?._game;
 
     #endregion
 
@@ -42,6 +43,7 @@ public class Main : MonoBehaviour {
 
     // Content.
     private readonly UIManager _ui = new();
+    private readonly GameManager _game = new();
 
     private static bool _isInitialized;
 

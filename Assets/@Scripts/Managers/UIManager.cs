@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,6 +25,8 @@ public class UIManager : ContentManager {
             return _root;
         }
     }
+
+    public int PanelCount => _panels.Count;
 
     #endregion
 
@@ -99,6 +102,10 @@ public class UIManager : ContentManager {
         _popups.Add(popup);
         popup.SetOrder(_popupOrder++);
 
+        Sequence sequense = DOTween.Sequence();
+        sequense.Append(popup.transform.DOScale(1.3f, 0.2f));
+        sequense.Append(popup.transform.DOScale(1.0f, 0.2f));
+
         return popup as T;
     }
 
@@ -108,10 +115,17 @@ public class UIManager : ContentManager {
         bool isLatest = _popups[^1] == popup;
 
         _popups.Remove(popup);
-        Destroy(popup);
 
-        if (isLatest) _popupOrder--;
-        else ReorderAllPopups();
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(popup.transform.DOScale(1.0f, 0.1f));
+        sequence.Append(popup.transform.DOScale(0.3f, 0.1f));
+        sequence.OnComplete(() => {
+            Destroy(popup);
+
+            if (isLatest) _popupOrder--;
+            else ReorderAllPopups();
+        });
     }
 
     public void ClosePopups<T>() where T : UI_Popup => _popups.Where(x => x is T).ToList().ForEach(ClosePopup);
@@ -159,6 +173,10 @@ public class UIManager : ContentManager {
         _panels.Add(panel);
         panel.SetOrder(_panelOrder++);
 
+        Sequence sequense = DOTween.Sequence();
+        sequense.Append(panel.transform.DOScale(1.3f, 0.2f));
+        sequense.Append(panel.transform.DOScale(1.0f, 0.2f));
+
         return panel as T;
     }
 
@@ -168,10 +186,16 @@ public class UIManager : ContentManager {
         bool isLatest = _panels[^1] == panel;
 
         _panels.Remove(panel);
-        Destroy(panel);
 
-        if (isLatest) _panelOrder--;
-        else ReorderAllPanels();
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(panel.transform.DOScale(1.0f, 0.1f));
+        sequence.Append(panel.transform.DOScale(0.3f, 0.1f));
+        sequence.OnComplete(() => {
+            Destroy(panel);
+
+            if (isLatest) _panelOrder--;
+            else ReorderAllPanels();
+        });
     }
 
     public void ClosePanels<T>() where T : UI_Panel => _panels.Where(x => x is T).ToList().ForEach(ClosePanel);

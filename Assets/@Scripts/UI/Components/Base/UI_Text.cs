@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -41,6 +42,13 @@ public class UI_Text : UI {
 
         _txt.alignment = alignment;
         return this;
+    }
+
+    public void FadeIn(float duration = 1) {
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(_txt.DOFade(0, 0))
+            .Append(_txt.DOFade(1, duration));
     }
 
 }

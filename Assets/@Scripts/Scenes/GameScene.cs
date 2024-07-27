@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class GameScene : Scene {
 
     #region Properties
@@ -13,6 +9,7 @@ public class GameScene : Scene {
     #region Fields
 
 
+
     #endregion
 
     #region Initialize
@@ -20,10 +17,13 @@ public class GameScene : Scene {
     protected override bool Initialize() {
         if (!base.Initialize()) return false;
 
-        // #1. 
-
-        // #2. UI 생성.
+        // #1. UI 생성.
         SceneUI = Main.UI.OpenScene<UI_Scene_Game>();
+        SceneUI.Initialize();
+        Main.UI.OpenPanel<UI_Panel_StartPanel>().SetInfo();
+
+        // #2. 게임 초기화 및 준비.
+        Main.Game.Load();
 
         return true;
     }
