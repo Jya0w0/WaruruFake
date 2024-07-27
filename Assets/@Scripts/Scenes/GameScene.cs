@@ -1,3 +1,5 @@
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 using UnityEngine;
 
 public class GameScene : Scene {
@@ -19,6 +21,12 @@ public class GameScene : Scene {
     protected override bool Initialize() {
         if (!base.Initialize()) return false;
 
+        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+
+        return true;
+    }
+
+    private void InitGame() {
         // #1. Controller 생성.
         Main.Screen.Reset();
         Main.Game.Controller = Instantiate(Main.Resource.Get<GameObject>("Controller")).GetComponent<Controller>();
@@ -33,8 +41,19 @@ public class GameScene : Scene {
 
         // #3. 게임 초기화 및 준비.
         Main.Game.Load();
+    }
 
-        return true;
+    #endregion
+
+    #region GPGS
+
+    private void ProcessAuthentication(SignInStatus status) {
+        if (status == SignInStatus.Success) {
+            InitGame();
+        }
+        else {
+
+        }
     }
 
     #endregion

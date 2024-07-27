@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +32,13 @@ public class DominoSpawner {
     #endregion
 
     public void NewDomino() {
-        Speed += (Speed <= 2.95f ? 0.05f : Random.Range(1.0f, 3.1f));
+        if (Speed <= 2.95) {
+            Speed += 0.05f;
+        }
+        else {
+            Speed += Random.Range(1.0f, 3.1f);
+            PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_ffffffffffffffffast, 100, null);
+        }
 
         Current = Main.Object.NewDomino();
         Current.SetInfo(SpawnPosition, SpawnRotation, Speed);

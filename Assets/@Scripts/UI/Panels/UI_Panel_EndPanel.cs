@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -81,11 +82,11 @@ public class UI_Panel_EndPanel : UI_Panel {
     }
 
     private void OnBtnRanking() {
-
+        PlayGamesPlatform.Instance.ShowLeaderboardUI(GPGSIds.leaderboard_warururank);
     }
 
     private void OnBtnAchievement() {
-
+        PlayGamesPlatform.Instance.ShowAchievementsUI();
     }
 
     #endregion

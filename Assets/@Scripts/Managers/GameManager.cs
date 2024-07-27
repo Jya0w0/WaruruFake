@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,13 @@ public class GameManager : ContentManager {
         get => _currentScore;
         set {
             _currentScore = value;
+            switch (value) {
+                case 1: PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_first, 100, null); break;
+                case 30: PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_30, 100, null); break;
+                case 60: PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_60, 100, null); break;
+                case 100: PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_100, 100, null); break;
+                case 250: PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_wowwow, 100, null); break;
+            }
             OnChangedScore?.Invoke(value);
         }
     }
@@ -156,6 +164,7 @@ public class GameManager : ContentManager {
         if (Main.Game.CurrentMoney < item.ItemPrice) return false;
         Main.Game.CurrentMoney -= item.ItemPrice;
         item.IsPurchased = true;
+        PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_fashionista, 100, null);
         return true;
     }
 

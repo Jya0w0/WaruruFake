@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -68,6 +69,7 @@ public class Domino : Entity {
         _isFalldown = true;
         Main.Screen.Camera.SetTarget(this.transform, true);
         Main.Game.Over();
+        PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_waruru, 100, null);
     }
 
     #endregion
