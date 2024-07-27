@@ -32,8 +32,8 @@ public class Timer {
     }
 
     public bool Update(float deltaTime) {
-        Current -= deltaTime;
         if (!ResetOnTime && Current <= 0) return false;
+        Current -= deltaTime;
         return true;
     }
 

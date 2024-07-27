@@ -80,6 +80,12 @@ public class Main : MonoBehaviour {
 
     #endregion
 
+    public static void Clear() {
+        Pool.Clear();
+        UI.Clear();
+        Object.Clear();
+    }
+
 }
 
 public abstract class CoreManager {

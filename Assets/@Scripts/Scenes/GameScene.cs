@@ -20,6 +20,7 @@ public class GameScene : Scene {
         if (!base.Initialize()) return false;
 
         // #1. Controller 持失.
+        Main.Screen.Reset();
         Main.Game.Controller = Instantiate(Main.Resource.Get<GameObject>("Controller")).GetComponent<Controller>();
 
         // #2. Ground 持失.

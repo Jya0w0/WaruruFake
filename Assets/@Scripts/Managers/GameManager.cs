@@ -96,28 +96,32 @@ public class GameManager : ContentManager {
     }
 
     public void Over() {
+        Controller.SetOverTimer(3f);
         State = GameState.Over;
     }
 
     public void End() {
         State = GameState.End;
+        Main.UI.OpenPanel<UI_Panel_EndPanel>().SetInfo();
     }
 
     public void Reset() {
         State = GameState.Ready;
+        Main.Clear();
         Main.Scene.Reload();
     }
 
     #region Score
 
     public void LoadScroe() {
+        CurrentScore = 0;
         BestScore = PlayerPrefs.GetInt("BestScore", 0);
         CurrentMoney = PlayerPrefs.GetInt("CurrentMoney", 0);
     }
     public void RecordScore() {
-        if (CurrentScore > BestScore) {
-            BestScore = CurrentScore;
-        }
+        CurrentScore = CurrentScore;
+        BestScore = CurrentScore > BestScore ? CurrentScore : BestScore;
+        CurrentMoney += CurrentScore;
     }
 
     #endregion
