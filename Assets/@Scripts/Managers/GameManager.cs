@@ -37,6 +37,7 @@ public class GameManager : ContentManager {
             OnChangedEquippedItem?.Invoke(value);
         }
     }
+    public PlaneColorItem PlaneColor { get; set; }
     public GameState State {
         get => _state;
         set {
@@ -55,7 +56,8 @@ public class GameManager : ContentManager {
     private int _currentMoney;
     private StoreItem _equippedItem;
     private GameState _state;
-    private List<StoreItem> _storeItems = new();
+    private readonly List<StoreItem> _storeItems = new();
+    private readonly List<PlaneColorItem> _planeColorItems = new();
 
     public event Action<int> OnChangedScore;
     public event Action<int> OnChangedBestScore;
@@ -68,6 +70,7 @@ public class GameManager : ContentManager {
     public override bool Initialize() {
         if (!base.Initialize()) return false;
 
+        State = GameState.Ready;
         Load();
 
         return true;
@@ -106,11 +109,18 @@ public class GameManager : ContentManager {
     public void LoadStore() {
         _storeItems.Clear();
         for (int i = 0; i < 9; i++) {
-            StoreItem item = new StoreItem(i);
+            StoreItem item = new(i);
             _storeItems.Add(item);
             if (item.IsEquipped) EquippedItem = item;
         }
         if (EquippedItem == null) EquipItem(_storeItems[0]);
+
+        _planeColorItems.Clear();
+        for (int i = 0; i < 6; i++) {
+            PlaneColorItem item = new(i);
+            _planeColorItems.Add(item);
+        }
+        if (PlaneColor == null) SelectPlaneColor(_planeColorItems[0]);
     }
 
     public StoreItem GetStoreItem(int index) => _storeItems[index];
@@ -133,6 +143,12 @@ public class GameManager : ContentManager {
             EquippedItem.IsEquipped = false;
         EquippedItem = item;
         EquippedItem.IsEquipped = true;
+    }
+
+    public PlaneColorItem GetPlaneColorItem(int index) => _planeColorItems[index];
+
+    public void SelectPlaneColor(PlaneColorItem item) {
+        PlaneColor = item;
     }
 
     #endregion

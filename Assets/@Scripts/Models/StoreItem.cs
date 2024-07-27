@@ -22,6 +22,8 @@ public class StoreItem {
             OnChangedEquipped?.Invoke(value);
         }
     }
+    public Material Material { get; private set; }
+    public Sprite Icon { get; private set; }
     public int ItemPrice => 2;
 
     #endregion
@@ -36,12 +38,13 @@ public class StoreItem {
 
     #endregion
 
-
     public StoreItem(int index) {
         this.Index = index;
 
-        this.IsPurchased = index == 0 ? true : PlayerPrefs.GetInt($"SkinPurchased_{index}", 0) == 1;
+        this.IsPurchased = index == 0 || PlayerPrefs.GetInt($"SkinPurchased_{index}", 0) == 1;
         this.IsEquipped = PlayerPrefs.GetInt($"SkinEquipped_{index}", 0) == 1;
+        this.Material = Main.Resource.Get<Material>($"DominoMaterial_{Index:00}");
+        this.Icon = Main.Resource.Get<Sprite>($"DominoSkin_{Index:00}");
     }
 
 }

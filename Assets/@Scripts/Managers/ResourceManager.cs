@@ -13,6 +13,7 @@ public class ResourceManager : CoreManager {
 
         Load<Sprite>(Path.RESOURCE_SPRITES);
         Load<GameObject>(Path.RESOURCE_PREFABS);
+        Load<Material>(Path.RESOURCE_MATERIALS);
 
         return true;
     }

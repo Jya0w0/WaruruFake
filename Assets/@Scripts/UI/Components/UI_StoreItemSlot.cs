@@ -25,9 +25,9 @@ public class UI_StoreItemSlot : UI {
         if (!base.Initialize()) return false;
 
         _btnSlot = this.gameObject.FindChild<UI_Button>("btnSlot");
-        _txtName = this.gameObject.FindChild<UI_Text>("_txtName");
-        _imgUseMark = this.gameObject.FindChild<UI_Image>("_imgUseMark");
-        _imgLock = this.gameObject.FindChild<UI_Image>("_imgLock");
+        _txtName = this.gameObject.FindChild<UI_Text>("txtName");
+        _imgUseMark = this.gameObject.FindChild<UI_Image>("imgUseMark");
+        _imgLock = this.gameObject.FindChild<UI_Image>("imgLock");
         _btnSlot.SetEvent(OnBtnSlot);
 
         return true;
@@ -38,6 +38,8 @@ public class UI_StoreItemSlot : UI {
 
         if (item == null) return;
         this.Item = item;
+        _btnSlot.SetImage(item.Icon);
+        _txtName.Text = $"½ºÅ² {item.Index + 1}";
 
         item.OnChangedPurchased -= OnChangedPurchased;
         item.OnChangedPurchased += OnChangedPurchased;

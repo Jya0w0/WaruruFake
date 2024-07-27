@@ -173,10 +173,6 @@ public class UIManager : ContentManager {
         _panels.Add(panel);
         panel.SetOrder(_panelOrder++);
 
-        Sequence sequense = DOTween.Sequence();
-        sequense.Append(panel.transform.DOScale(1.3f, 0.2f));
-        sequense.Append(panel.transform.DOScale(1.0f, 0.2f));
-
         return panel as T;
     }
 
@@ -186,16 +182,10 @@ public class UIManager : ContentManager {
         bool isLatest = _panels[^1] == panel;
 
         _panels.Remove(panel);
+        Destroy(panel);
 
-        Sequence sequence = DOTween.Sequence();
-        sequence.Append(panel.transform.DOScale(1.0f, 0.1f));
-        sequence.Append(panel.transform.DOScale(0.3f, 0.1f));
-        sequence.OnComplete(() => {
-            Destroy(panel);
-
-            if (isLatest) _panelOrder--;
-            else ReorderAllPanels();
-        });
+        if (isLatest) _panelOrder--;
+        else ReorderAllPanels();
     }
 
     public void ClosePanels<T>() where T : UI_Panel => _panels.Where(x => x is T).ToList().ForEach(ClosePanel);

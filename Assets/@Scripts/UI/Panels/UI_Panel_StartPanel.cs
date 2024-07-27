@@ -69,7 +69,7 @@ public class UI_Panel_StartPanel : UI_Panel {
     }
 
     private void OnBtnStore() {
-        Main.UI.OpenPanel<UI_Panel_StorePanel>();
+        Main.UI.OpenPanel<UI_Panel_StorePanel>().SetInfo();
         this.Close();
     }
 

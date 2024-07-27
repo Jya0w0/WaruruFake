@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UI_Panel : UI {
 
@@ -16,11 +17,19 @@ public class UI_Panel : UI {
     protected Canvas _canvas;
     protected CanvasScaler _scaler;
 
-    public Action OnClosed;
+    public event Action OnClosed;
 
     #endregion
 
     #region MonoBehaviours
+
+    protected override void OnEnable() {
+        base.OnEnable();
+
+        Sequence sequense = DOTween.Sequence();
+        sequense.Append(_rect.transform.DOScale(1.3f, 0.2f));
+        sequense.Append(_rect.transform.DOScale(1.0f, 0.2f));
+    }
 
     #endregion
 
@@ -73,8 +82,14 @@ public class UI_Panel : UI {
     }
 
     public virtual void Close() {
-        OnClosed?.Invoke();
-        Main.UI.ClosePanel(this);
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(_rect.transform.DOScale(1.0f, 0.1f));
+        sequence.Append(_rect.transform.DOScale(0.3f, 0.1f));
+        sequence.OnComplete(() => {
+            _rect.transform.localScale = Vector3.one;
+            Main.UI.ClosePanel(this);
+            OnClosed?.Invoke();
+        });
     }
 
     #endregion

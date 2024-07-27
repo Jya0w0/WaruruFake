@@ -108,6 +108,7 @@ public abstract class ContentManager {
 public static class Path {
     public static readonly string RESOURCE_SPRITES = "Sprites";
     public static readonly string RESOURCE_PREFABS = "Prefabs";
+    public static readonly string RESOURCE_MATERIALS = "Materials";
 
     public static readonly string DATA_CSV = "@Resources/Data";
     public static readonly string DATA_JSON = "Resources/Data";

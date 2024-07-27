@@ -24,7 +24,11 @@ public class UI_Panel_InfoPanel : UI_Panel {
 
     #region Events
 
-    private void OnBtnBack() => this.Close();
+    private void OnBtnBack() {
+        if (Main.Game.State == GameState.Ready)
+            Main.UI.OpenPanel<UI_Panel_StartPanel>().SetInfo();
+        this.Close();
+    }
 
     #endregion
 
