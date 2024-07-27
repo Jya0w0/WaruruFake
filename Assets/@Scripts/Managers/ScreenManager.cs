@@ -26,7 +26,7 @@ public class ScreenManager : CoreManager {
         if (!base.Initialize()) return false;
 
 #if UNITY_IOS || UNITY_ANDROID
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
 #endif
 
         Reset();

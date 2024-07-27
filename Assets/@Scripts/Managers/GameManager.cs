@@ -43,9 +43,16 @@ public class GameManager : ContentManager {
         set {
             if (value == _state) return;
             _state = value;
+            if (_state == GameState.Ready) {
+
+            }
+            else if (_state == GameState.Play) {
+                Spawner = new();
+            }
             OnChangedState?.Invoke(value);
         }
     }
+    public DominoSpawner Spawner { get; private set; }
 
     #endregion
 
